@@ -12,7 +12,7 @@ const Home = () => {
     return (
         <div>
             <Hero></Hero>
-            
+
             <div className="grid md:grid-cols-3 gap-8 " >
                 {
                     services.map(service => <div
@@ -26,7 +26,6 @@ const Home = () => {
                                 <img src={service.img} style={{ objectFit: 'cover' }} alt={service.title} />
                             </PhotoView>
                         </PhotoProvider>
-
                         <p>{service.description.slice(0, 80)}...</p>
                         <p>{service.price}$</p>
                         <button className='btn'>

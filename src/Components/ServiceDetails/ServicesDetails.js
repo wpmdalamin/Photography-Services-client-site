@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useLoaderData } from 'react-router-dom';
 
 
 const ServicesDetails = () => {
+    const [reviews, setServices] = useState([])
+    console.log(reviews);
     const { title, img, description, price } = useLoaderData();
     const handelReviews = (event) => {
         event.preventDefault()
@@ -25,6 +27,12 @@ const ServicesDetails = () => {
         event.target.reset()
 
     }
+    useEffect( () => {
+        fetch('http://localhost:5000/reviews')
+        .then(res => res.json())
+        .then(data => setServices(data))
+    }, [])
+    
 
     return (
         <div>
@@ -53,12 +61,27 @@ const ServicesDetails = () => {
                 </div>
                 <div>
                     <form onSubmit={handelReviews} className='grid grid-cols-1 w-2/5 m-auto'>
-                        <input type="text" name='name' placeholder="Name" className="input input-bordered input-primary my-3 " />
-                        <input type="email" name="email" placeholder="Email" className="input input-bordered input-primary" />
-                        <textarea name='reviewtext' className="textarea textarea-primary my-3" placeholder="Write Reviews..."></textarea>
+                        <input type="text" name='name' required placeholder="Name" className="input input-bordered input-primary my-3 " />
+                        <input type="email" name="email" required placeholder="Email" className="input input-bordered input-primary" />
+                        <textarea name='reviewtext' required className="textarea textarea-primary my-3" placeholder="Write Reviews..."></textarea>
                         <input className='btn my-3' type="submit" value="Add Reviews" />
 
                     </form>
+                </div>
+                {/* Show reviews section */}
+                <div className=''>
+                    <h3 className='text-center text-3xl'>All Reviews</h3>
+                    {
+                        reviews.map(rv => <div
+                            key={rv._id}
+                            className="border w-1/5 p-3 m-3 text-left"
+                        >
+                            <p>{rv.name}</p>
+                            <p>{rv.email}</p>
+                            <p>{rv.reviewtext}</p>
+
+                        </div>)
+                    }
                 </div>
             </div>
 
