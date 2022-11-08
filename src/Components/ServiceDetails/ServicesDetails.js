@@ -11,7 +11,7 @@ const ServicesDetails = () => {
         const name = event.target.name.value;
         const email = event.target.email.value;
         const reviewtext = event.target.reviewtext.value;
-        const review = { name, email, reviewtext }
+        const review = { name, email, reviewtext, title }
         fetch('http://localhost:5000/review', {
             method: 'POST',
             headers: {

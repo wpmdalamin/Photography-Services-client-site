@@ -22,7 +22,7 @@ const AddService = () => {
             console.log(data)
         })
 
-        // event.target.reset()
+        event.target.reset()
     }
     return (
         <div>
