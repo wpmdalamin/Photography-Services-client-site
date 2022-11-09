@@ -1,6 +1,8 @@
 import React from 'react';
+import useTitle from '../../Hook/useTitle';
 
 const AddService = () => {
+    useTitle('Add Service')
     const handelAddService = (event) => {
         event.preventDefault()
         const title = event.target.serviceName.value;

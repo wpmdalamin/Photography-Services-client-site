@@ -3,12 +3,12 @@ import { Link, useLoaderData } from 'react-router-dom';
 import Hero from '../Hero/Hero';
 import { PhotoProvider, PhotoView } from 'react-photo-view';
 import 'react-photo-view/dist/react-photo-view.css';
-
+import useTitle from '../../Hook/useTitle';
 
 
 const Home = () => {
-    const services = useLoaderData()
-    console.log(services)
+    const services = useLoaderData();
+    useTitle('Home')
     return (
         <div>
             <Hero></Hero>
@@ -18,7 +18,6 @@ const Home = () => {
                     services.map(service => <div
                         key={service._id}
                         className="border p-3 rounded"
-
                     >
                         <h3 className='text-3xl'>{service.title}</h3>
                         <PhotoProvider>
@@ -29,7 +28,7 @@ const Home = () => {
                         <p>{service.description.slice(0, 80)}...</p>
                         <p>{service.price}$</p>
                         <button className='btn'>
-                            <Link to={`/service/${service._id}`}>service deatail</Link>
+                            <Link to={`/service/${service._id}`}>Service Deatail</Link>
                         </button>
 
                     </div>)

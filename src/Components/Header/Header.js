@@ -34,6 +34,7 @@ const Header = () => {
                         <li> <Link to='/blog'>Blog</Link></li>
                         <li> <Link to='/services'>Services</Link></li>
                         <li> <Link to='/add-services'>Add Services</Link></li>
+                        <li> <Link to='/my-reviews'>My Reviews</Link></li>
 
                     <li>{user?.email}</li>
 
