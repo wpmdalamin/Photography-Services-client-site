@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { AuthContext } from '../../Context/AuthProvider/AuthProvider';
 import useTitle from '../../Hook/useTitle';
 
@@ -15,19 +16,20 @@ const MyReviews = () => {
     }, [user?.email])
 
     const handelReviewDelete = (review) => {
-        console.log("delete want" , review);
-        fetch(`http://localhost:5000/reviews/${review._id}`, {
-            method: "DELETE"
-        })
-        .then(res => res.json())
-        .then(data => {
-            console.log(data);
-            if(data.deletedCount > 0){
-                alert("Successfuly Deleted.");
-                const remainreviews = reviews.filter(rev => rev._id !== review._id)
-                setReviews(remainreviews);
-            }
-        })
+        const agree = window.confirm(`Are you sure want delete ${review.reviewtext}`)
+        if (agree) {
+            fetch(`http://localhost:5000/reviews/${review._id}`, {
+                method: "DELETE"
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (data.deletedCount > 0) {
+                    alert("Successfuly Deleted.");
+                    const remainreviews = reviews.filter(rev => rev._id !== review._id)
+                    setReviews(remainreviews);
+                }
+            })
+        }
 
     }
     return (
@@ -53,7 +55,7 @@ const MyReviews = () => {
                                 <td><p>{review.title}</p></td>
                                 <td><p>{review.reviewtext}</p></td>
                                 <td><p>***** {review.reating}</p></td>
-                                <td><p>=</p></td>
+                                <td><Link to={`/edit/${review._id}`} className='btn'>Edit</Link></td>
                                 <td><p onClick={() => handelReviewDelete(review)} className='btn'>x</p></td>
                             </tr>
 
