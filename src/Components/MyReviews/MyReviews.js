@@ -3,15 +3,33 @@ import { AuthContext } from '../../Context/AuthProvider/AuthProvider';
 import useTitle from '../../Hook/useTitle';
 
 const MyReviews = () => {
-    useTitle('My Reviews')
+    useTitle('My Reviews');
+
     const { user } = useContext(AuthContext);
     const [reviews, setReviews] = useState([])
-    console.log(reviews)
+
     useEffect(() => {
         fetch(`http://localhost:5000/my-reviews?email=${user.email}`)
             .then(res => res.json())
             .then(data => setReviews(data))
     }, [user?.email])
+
+    const handelReviewDelete = (review) => {
+        console.log("delete want" , review);
+        fetch(`http://localhost:5000/reviews/${review._id}`, {
+            method: "DELETE"
+        })
+        .then(res => res.json())
+        .then(data => {
+            console.log(data);
+            if(data.deletedCount > 0){
+                alert("Successfuly Deleted.");
+                const remainreviews = reviews.filter(rev => rev._id !== review._id)
+                setReviews(remainreviews);
+            }
+        })
+
+    }
     return (
         <div>
             <h2 className='text-center text-3xl py-4'>All My Reviews</h2>
@@ -24,17 +42,19 @@ const MyReviews = () => {
                             <th>Reviews Text</th>
                             <th>Reating</th>
                             <th>Edit</th>
+                            <th>Delete</th>
                         </tr>
                     </thead>
                     <tbody>
                         {
-                            reviews.map(review => <tr>
+                            reviews.map(review => <tr key={review._id}>
 
                                 <td><p>{review.name}</p></td>
                                 <td><p>{review.title}</p></td>
                                 <td><p>{review.reviewtext}</p></td>
-                                <td><p>*****</p></td>
+                                <td><p>***** {review.reating}</p></td>
                                 <td><p>=</p></td>
+                                <td><p onClick={() => handelReviewDelete(review)} className='btn'>x</p></td>
                             </tr>
 
                             )

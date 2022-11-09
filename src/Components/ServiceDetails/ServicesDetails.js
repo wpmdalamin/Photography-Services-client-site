@@ -6,7 +6,7 @@ import useTitle from '../../Hook/useTitle';
 
 const ServicesDetails = () => {
     const [reviews, setServices] = useState([])
-    const {user} = useContext(AuthContext)
+    const { user } = useContext(AuthContext)
     const { title, img, description, price } = useLoaderData();
     useTitle(title);
 
@@ -14,8 +14,9 @@ const ServicesDetails = () => {
         event.preventDefault()
         const name = event.target.name.value;
         const email = event.target.email.value;
+        const reating = event.target.reating.value;
         const reviewtext = event.target.reviewtext.value;
-        const review = { name, email, reviewtext, title }
+        const review = { name, email, reviewtext, reating, title }
         fetch('http://localhost:5000/review', {
             method: 'POST',
             headers: {
@@ -31,12 +32,12 @@ const ServicesDetails = () => {
         event.target.reset()
 
     }
-    useEffect( () => {
-        fetch('http://localhost:5000/reviews')
-        .then(res => res.json())
-        .then(data => setServices(data))
-    }, [])
-    
+    useEffect(() => {
+        fetch(`http://localhost:5000/service-reviews?title=${title}`)
+            .then(res => res.json())
+            .then(data => setServices(data))
+    }, [title])
+
 
     return (
         <div>
@@ -68,6 +69,7 @@ const ServicesDetails = () => {
                     <form onSubmit={handelReviews} className='grid grid-cols-1 w-2/5 m-auto'>
                         <input type="text" name='name' required placeholder="Name" className="input input-bordered input-primary my-3 " />
                         <input type="email" name="email" defaultValue={user?.email} required placeholder="Email" className="input input-bordered input-primary" />
+                        <input type="text" name="reating" required placeholder="Reating" className="input input-bordered input-primary my-3" />
                         <textarea name='reviewtext' required className="textarea textarea-primary my-3" placeholder="Write Reviews..."></textarea>
                         <input className='btn my-3' type="submit" value="Add Reviews" />
 
@@ -75,14 +77,18 @@ const ServicesDetails = () => {
                 </div>
                 {/* Show reviews section */}
                 <div className=''>
-                    <h3 className='text-center text-3xl'>All Reviews</h3>
+                    <h3 className='text-center text-3xl'>All Reviews of the service</h3>
                     {
                         reviews.map(rv => <div
                             key={rv._id}
-                            className="border w-1/5 p-3 m-3 text-left"
+                            className="border md:w-2/5 p-3 m-3 text-left"
                         >
-                            <p>{rv.name}</p>
-                            <p>{rv.email}</p>
+                            <div>
+                                <p>Reviews Name: {rv.name}</p>
+                                <p>Review Date: 10/11/2022</p>
+                                <p>{rv.email}</p>
+                            </div>
+                            <p>{rv.reating} Star</p>
                             <p>{rv.reviewtext}</p>
 
                         </div>)

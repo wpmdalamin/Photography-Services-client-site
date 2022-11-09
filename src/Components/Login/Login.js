@@ -44,7 +44,7 @@ const Login = () => {
     return (
         <div>
             <h3 className='text-5xl text-center'>Login</h3>
-            <div className='w-1/2 m-auto'>
+            <div className='md:w-1/2 m-auto'>
                 <form onSubmit={handellogin} className="card-body">
                     <div className="form-control">
                         <label className="label">
