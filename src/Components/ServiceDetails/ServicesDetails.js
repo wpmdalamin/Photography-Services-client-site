@@ -7,6 +7,7 @@ const ServicesDetails = () => {
     const [reviews, setServices] = useState([])
     const {user} = useContext(AuthContext)
     const { title, img, description, price } = useLoaderData();
+    
     const handelReviews = (event) => {
         event.preventDefault()
         const name = event.target.name.value;
