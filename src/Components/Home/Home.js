@@ -37,7 +37,7 @@ const Home = () => {
             </div>
 
             <div className='text-center py-3'>
-                <Link to="/services" className='btn btn-gost'> see all</Link>
+                <Link to="/services" className='btn btn-gost'>see all</Link>
             </div>
         </div>
     );

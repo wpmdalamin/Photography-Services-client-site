@@ -32,6 +32,7 @@ const Header = () => {
                 <ul className="menu menu-horizontal p-0">
                     {/* Laptop devices menu */}
                         <li> <Link to='/blog'>Blog</Link></li>
+                        <li> <Link to='/services'>Services</Link></li>
                         <li> <Link to='/add-services'>Add Services</Link></li>
 
                     <li>{user?.email}</li>

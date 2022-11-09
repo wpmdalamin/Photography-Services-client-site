@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useLoaderData } from 'react-router-dom';
+import { AuthContext } from '../../Context/AuthProvider/AuthProvider';
 
 
 const ServicesDetails = () => {
     const [reviews, setServices] = useState([])
-    console.log(reviews);
+    const {user} = useContext(AuthContext)
     const { title, img, description, price } = useLoaderData();
     const handelReviews = (event) => {
         event.preventDefault()
@@ -60,9 +61,10 @@ const ServicesDetails = () => {
                     </div>
                 </div>
                 <div>
+                    <h3 className='text-center text-3xl py-3'>Add Your Review</h3>
                     <form onSubmit={handelReviews} className='grid grid-cols-1 w-2/5 m-auto'>
                         <input type="text" name='name' required placeholder="Name" className="input input-bordered input-primary my-3 " />
-                        <input type="email" name="email" required placeholder="Email" className="input input-bordered input-primary" />
+                        <input type="email" name="email" defaultValue={user?.email} required placeholder="Email" className="input input-bordered input-primary" />
                         <textarea name='reviewtext' required className="textarea textarea-primary my-3" placeholder="Write Reviews..."></textarea>
                         <input className='btn my-3' type="submit" value="Add Reviews" />
 

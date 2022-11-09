@@ -8,6 +8,7 @@ import Register from "../Components/Register/Register";
 import ServicesDetails from "../Components/ServiceDetails/ServicesDetails";
 import Services from "../Components/Services/Services";
 import Main from "../Layout/Main";
+import PrivateRoute from "./PrivateRoute/PrivateRoute";
 
 export const router = createBrowserRouter([
     {
@@ -32,7 +33,7 @@ export const router = createBrowserRouter([
             },
             {   
                 path: "/add-services",
-                element: <AddService></AddService>
+                element: <PrivateRoute><AddService></AddService></PrivateRoute>,
 
             },
             {
