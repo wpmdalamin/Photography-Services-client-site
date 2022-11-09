@@ -68,10 +68,10 @@ const Login = () => {
                 <div className='text-danger'>
                     <p>{error}</p>
                 </div>
-                <div>
-                    <button onClick={handelGoogleSignUp} className='btn btn-gost'>Google</button>
+                <div className="sm:w-full md:w-1/2 m-auto flex justify-center">
+                    <button onClick={handelGoogleSignUp} className='btn btn-primary sm:w-1/2 md:w-full'>Google</button>
                 </div>
-                <p>Don't have an account? <Link to="/register">Sign Up</Link></p>
+                <p className="text-center py-3">Don't have an account? <Link to="/register">Sign Up</Link></p>
             </div>
         </div >
     );

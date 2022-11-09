@@ -17,7 +17,7 @@ const ServicesDetails = () => {
         const reating = event.target.reating.value;
         const reviewtext = event.target.reviewtext.value;
         const review = { name, email, reviewtext, reating, title }
-        fetch('http://localhost:5000/review', {
+        fetch('https://my-services-server.vercel.app/review', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -33,7 +33,7 @@ const ServicesDetails = () => {
 
     }
     useEffect(() => {
-        fetch(`http://localhost:5000/service-reviews?title=${title}`)
+        fetch(`https://my-services-server.vercel.app/service-reviews?title=${title}`)
             .then(res => res.json())
             .then(data => setServices(data))
     }, [title])
@@ -43,10 +43,10 @@ const ServicesDetails = () => {
         <div>
             <div className="hero min-h-screen bg-base-200">
                 <div className="hero-content flex-col lg:flex-row-reverse">
-                    <img src={img} className="max-w-sm rounded-lg shadow-2xl" alt={title} />
-                    <div>
+                    <img src={img} className="w-5/6 rounded-lg shadow-2xl" alt={title} />
+                    <div className='sm:w-full '>
                         <h1 className="text-5xl font-bold">{title}</h1>
-                        <h3>Price: {price}$</h3>
+                        <h3 className='text-2xl py-2'>Price: <span className='text-orange-600'>{price}$</span></h3>
                         <p className="py-6">{description}</p>
                     </div>
                 </div>
@@ -66,12 +66,12 @@ const ServicesDetails = () => {
                 </div>
                 <div>
                     <h3 className='text-center text-3xl py-3'>Add Your Review</h3>
-                    <form onSubmit={handelReviews} className='grid grid-cols-1 w-2/5 m-auto'>
+                    <form onSubmit={handelReviews} className='grid grid-cols-1 md:w-2/5 sm:p-2 m-auto'>
                         <input type="text" name='name' required placeholder="Name" className="input input-bordered input-primary my-3 " />
                         <input type="email" name="email" defaultValue={user?.email} required placeholder="Email" className="input input-bordered input-primary" />
                         <input type="text" name="reating" required placeholder="Reating" className="input input-bordered input-primary my-3" />
                         <textarea name='reviewtext' required className="textarea textarea-primary my-3" placeholder="Write Reviews..."></textarea>
-                        <input className='btn my-3' type="submit" value="Add Reviews" />
+                        <input className='btn btn-primary my-3' type="submit" value="Add Reviews" />
 
                     </form>
                 </div>
@@ -81,7 +81,7 @@ const ServicesDetails = () => {
                     {
                         reviews.map(rv => <div
                             key={rv._id}
-                            className="border md:w-2/5 p-3 m-3 text-left"
+                            className="border border-slate-600 rounded md:w-2/5 p-3 m-3 text-left"
                         >
                             <div>
                                 <p>Reviews Name: {rv.name}</p>

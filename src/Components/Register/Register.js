@@ -24,7 +24,7 @@ const Register = () => {
         <div>
             <h3 className='text-5xl text-center'>Register</h3>
 
-            <div className='w-1/2 m-auto'>
+            <div className='md:w-1/2 m-auto'>
                 <form onSubmit={handelregister} className="card-body">
                     <div className="form-control">
                         <label className="label">
@@ -49,7 +49,7 @@ const Register = () => {
                     </div>
                 </form>
 
-                <p>Allredy have an account? <Link to="/login">Login</Link></p>
+                <p className="text-center py-3">Allredy have an account? <Link to="/login">Login</Link></p>
             </div>
         </div>
     );

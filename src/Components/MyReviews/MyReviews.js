@@ -10,7 +10,7 @@ const MyReviews = () => {
     const [reviews, setReviews] = useState([])
 
     useEffect(() => {
-        fetch(`http://localhost:5000/my-reviews?email=${user.email}`)
+        fetch(`https://my-services-server.vercel.app/my-reviews?email=${user.email}`)
             .then(res => res.json())
             .then(data => setReviews(data))
     }, [user?.email])
@@ -18,7 +18,7 @@ const MyReviews = () => {
     const handelReviewDelete = (review) => {
         const agree = window.confirm(`Are you sure want delete ${review.reviewtext}`)
         if (agree) {
-            fetch(`http://localhost:5000/reviews/${review._id}`, {
+            fetch(`https://my-services-server.vercel.app/reviews/${review._id}`, {
                 method: "DELETE"
             })
             .then(res => res.json())
@@ -54,9 +54,9 @@ const MyReviews = () => {
                                 <td><p>{review.name}</p></td>
                                 <td><p>{review.title}</p></td>
                                 <td><p>{review.reviewtext}</p></td>
-                                <td><p>***** {review.reating}</p></td>
-                                <td><Link to={`/edit/${review._id}`} className='btn'>Edit</Link></td>
-                                <td><p onClick={() => handelReviewDelete(review)} className='btn'>x</p></td>
+                                <td><p><span>*****</span> {review.reating}</p></td>
+                                <td><Link to={`/edit/${review._id}`} className='btn btn-accent btn-sm'>Edit</Link></td>
+                                <td><p onClick={() => handelReviewDelete(review)} className='btn btn-secondary btn-sm'>x</p></td>
                             </tr>
 
                             )

@@ -6,7 +6,7 @@ const Blog = () => {
     return (
         <div>
             <h1 className='text-4xl text-center py-3'>Blog</h1>
-            <div className='w-2/3 m-auto py-5'>
+            <div className='sm:w-4/5 md:w-2/3 m-auto px-2 py-5'>
 
                 <div className="collapse">
                     <input type="checkbox" className="peer" />

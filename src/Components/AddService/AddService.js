@@ -12,7 +12,7 @@ const AddService = () => {
         const description = event.target.description.value;
         const addService = { title, price, img, description, providerName }
         console.log(addService);
-        fetch('http://localhost:5000/add-service', {
+        fetch('https://my-services-server.vercel.app/add-service', {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json'
@@ -37,7 +37,7 @@ const AddService = () => {
                     <input type="text" name="img" required placeholder="Service Images Link" className="input input-bordered input-primary my-3" />
                     <input type="text" name="providerName" required placeholder="Service Provider Name" className="input input-bordered input-primary my-3" />
                     <textarea name='description' required className="textarea textarea-primary my-3" placeholder="Write Service Description..."></textarea>
-                    <input className='btn my-3' type="submit" value="Add Service" />
+                    <input className='btn btn-primary my-3' type="submit" value="Add Service" />
 
                 </form>
             </div>

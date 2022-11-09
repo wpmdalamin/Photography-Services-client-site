@@ -5,7 +5,7 @@ import Header from '../Components/Header/Header';
 
 const Main = () => {
     return (
-        <div className=''>
+        <div className='md:px-8'>
             <Header></Header>
             <Outlet></Outlet>
             <Footer></Footer>
