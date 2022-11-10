@@ -1,12 +1,11 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { useLoaderData } from 'react-router-dom';
+import { Link, useLoaderData } from 'react-router-dom';
 import { AuthContext } from '../../Context/AuthProvider/AuthProvider';
 import useTitle from '../../Hook/useTitle';
-
+import { FaUserCircle } from "react-icons/fa";
 
 const ServicesDetails = () => {
     const [reviews, setReviews] = useState([])
-    // const [loading, setLoading] = useState(true)
     const { user } = useContext(AuthContext)
 
     const { title, img, description, price } = useLoaderData();
@@ -22,7 +21,7 @@ const ServicesDetails = () => {
 
         const review = { name, email, reviewtext, reating, title }
 
-        fetch('http://localhost:5000/review', {
+        fetch('https://my-services-server.vercel.app/review', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -37,7 +36,7 @@ const ServicesDetails = () => {
         event.target.reset();
     }
     useEffect(() => {
-        fetch(`http://localhost:5000/service-reviews?title=${title}`)
+        fetch(`https://my-services-server.vercel.app/service-reviews?title=${title}`)
             .then(res => res.json())
             .then(data => setReviews(data))
     }, [title])
@@ -68,15 +67,26 @@ const ServicesDetails = () => {
                     </div>
                 </div>
                 <div>
-                    <h3 className='text-center text-3xl py-3'>Add Your Review</h3>
-                    <form onSubmit={handelReviews} className='grid grid-cols-1 md:w-2/5 sm:p-2 m-auto'>
-                        <input type="text" name='name' required placeholder="Name" className="input input-bordered input-primary my-3 " />
-                        <input type="email" name="email" defaultValue={user?.email} required placeholder="Email" className="input input-bordered input-primary" />
-                        <input type="text" name="reating" required placeholder="Reating" className="input input-bordered input-primary my-3" />
-                        <textarea name='reviewtext' required className="textarea textarea-primary my-3" placeholder="Write Reviews..."></textarea>
-                        <input className='btn btn-primary my-3' type="submit" value="Add Reviews" />
 
-                    </form>
+                    {
+                        user?.uid ?
+                            <>
+                                <h3 className='text-center text-3xl py-3'>Add Your Review</h3>
+                                <form onSubmit={handelReviews} className='grid grid-cols-1 md:w-2/5 sm:p-2 m-auto'>
+                                    <input type="text" name='name' required placeholder="Name" className="input input-bordered input-primary my-3 " />
+                                    <input type="email" name="email" defaultValue={user?.email} required placeholder="Email" className="input input-bordered input-primary" />
+                                    <input type="text" name="reating" required placeholder="Reating" className="input input-bordered input-primary my-3" />
+                                    <textarea name='reviewtext' required className="textarea textarea-primary my-3" placeholder="Write Reviews..."></textarea>
+                                    <input className='btn btn-primary my-3' type="submit" value="Add Reviews" />
+
+                                </form>
+                            </>
+                            :
+                            <>
+                                <p className='my-5 text-2xl text-orange-600'>Please <Link className='text-green-500' to="/login">login</Link> to add a review</p>
+                            </>
+                    }
+
                 </div>
                 {/* Show reviews section */}
                 <div className=''>
@@ -86,13 +96,22 @@ const ServicesDetails = () => {
                             key={rv._id}
                             className="border border-slate-600 rounded md:w-2/5 p-3 m-3 text-left"
                         >
-                            <div>
-                                <p>Reviews Name: {rv.name}</p>
-                                <p>Review Date: 10/11/2022</p>
-                                <p>{rv.email}</p>
+                            <div className='flex justify-between py-2'>
+                                <div className='flex'>
+                                    <span className='text-2xl pr-2'> <FaUserCircle></FaUserCircle></span>
+                                    <span> {rv.name}</span>
+
+                                </div>
+                                <div>
+                                    <p>{rv.reating} Star</p>
+                                </div>
+    
+                            <p>Review Date: 10/11/2022</p>
                             </div>
-                            <p>{rv.reating} Star</p>
-                            <p>{rv.reviewtext}</p>
+
+                            <div className=''>
+                                <p>{rv.reviewtext}</p>
+                            </div>
 
                         </div>)
                     }

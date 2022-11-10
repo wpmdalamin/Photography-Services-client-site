@@ -3,6 +3,7 @@ import React, { useContext, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Context/AuthProvider/AuthProvider';
 import useTitle from '../../Hook/useTitle';
+import { FaGoogle } from "react-icons/fa";
 
 
 const provider = new GoogleAuthProvider();
@@ -30,7 +31,7 @@ const Login = () => {
                 email: user.email
             }
 
-            fetch('http://localhost:5000/jwt', {
+            fetch('https://my-services-server.vercel.app/jwt', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -74,9 +75,6 @@ const Login = () => {
                             <span className="label-text">Password</span>
                         </label>
                         <input type="password" name="password" required placeholder="password" className="input input-bordered" />
-                        <label className="label">
-                            <Link href="#" className="label-text-alt link link-hover">Forgot password?</Link>
-                        </label>
                     </div>
                     <div className="form-control mt-6">
                         <button className="btn btn-primary">Login</button>
@@ -86,7 +84,7 @@ const Login = () => {
                     <p>{error}</p>
                 </div>
                 <div className="sm:w-full md:w-1/2 m-auto flex justify-center">
-                    <button onClick={handelGoogleSignUp} className='btn btn-primary sm:w-1/2 md:w-full'>Google</button>
+                    <button onClick={handelGoogleSignUp} className='btn btn-primary sm:w-1/2 md:w-full'><span className='px-2'> <FaGoogle></FaGoogle> </span> Google</button>
                 </div>
                 <p className="text-center py-3">Don't have an account? <Link to="/register">Sign Up</Link></p>
             </div>

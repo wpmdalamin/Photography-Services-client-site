@@ -18,7 +18,7 @@ const ReviewUpdate = () => {
         const review = { name, email, reviewtext, reating, title }
         console.log(review)
 
-        fetch(`http://localhost:5000/reviews/${rdata._id}`, {
+        fetch(`https://my-services-server.vercel.app/reviews/${rdata._id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'

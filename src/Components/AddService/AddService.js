@@ -1,8 +1,12 @@
 import React from 'react';
 import useTitle from '../../Hook/useTitle';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const AddService = () => {
     useTitle('Add Service')
+
+    // const notify = () => toast("Wow so easy!");
     const handelAddService = (event) => {
         event.preventDefault()
         const title = event.target.serviceName.value;
@@ -12,7 +16,7 @@ const AddService = () => {
         const description = event.target.description.value;
         const addService = { title, price, img, description, providerName }
         console.log(addService);
-        fetch('http://localhost:5000/add-service', {
+        fetch('https://my-services-server.vercel.app/add-service', {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json'
@@ -23,7 +27,16 @@ const AddService = () => {
         .then(data => {
             console.log(data)
         })
-
+        toast('Services Added successfully!', {
+            position: "top-center",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+            });
         event.target.reset()
     }
     return (
@@ -41,6 +54,7 @@ const AddService = () => {
 
                 </form>
             </div>
+            <ToastContainer />
         </div>
     );
 };
