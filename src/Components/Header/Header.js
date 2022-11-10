@@ -13,7 +13,7 @@ const Header = () => {
             .catch(error => console.log(error))
     }
     return (
-        <div className="navbar bg-base-100">
+        <div className="navbar bg-slate-200 md:px-8">
             <div className="navbar-start">
                 <div className="dropdown">
                     <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -34,9 +34,9 @@ const Header = () => {
                 <Link to="/" className="w-24"> <img src={logo} alt="" /></Link>
             </div>
             <div className="navbar-center hidden lg:flex">
-                <ul className="menu menu-horizontal p-0">
+                <ul className="menu menu-horizontal p-0 text-black	">
                     {/* Laptop devices menu */}
-                    <li> <Link to='/blog'>Blog</Link></li>
+                    <li className='text-black'> <Link to='/blog'>Blog</Link></li>
                     <li> <Link to='/services'>Services</Link></li>
                     {
                         user?.uid && <>
