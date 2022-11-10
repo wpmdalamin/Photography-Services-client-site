@@ -4,6 +4,7 @@ import Hero from '../Hero/Hero';
 import { PhotoProvider, PhotoView } from 'react-photo-view';
 import 'react-photo-view/dist/react-photo-view.css';
 import useTitle from '../../Hook/useTitle';
+import RecentWork from '../RecentWork/RecentWork';
 
 
 const Home = () => {
@@ -39,6 +40,8 @@ const Home = () => {
             <div className='text-center py-3'>
                 <Link to="/services" className='btn btn-gost'>see all</Link>
             </div>
+
+            <RecentWork></RecentWork>
         </div>
     );
 };

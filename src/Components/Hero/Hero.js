@@ -1,9 +1,18 @@
 import React from 'react';
+import bgimg from '../../images/Md-Photography-Services.jpg';
+
+var sectionStyle = {
+    width: "100%",
+    height: "400px",
+    backgroundImage: "url(" + { bgimg } + ")"
+  };
 
 const Hero = () => {
+
+    
     return (
         <div>
-            <div className="hero min-h-screen bg-base-200">
+            <div style={ sectionStyle } className="hero min-h-screen">
                 <div className="hero-content text-center">
                     <div className="max-w-md">
                         <h1 className="text-5xl font-bold">Hello there</h1>

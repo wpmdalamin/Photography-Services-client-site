@@ -5,9 +5,13 @@ import Header from '../Components/Header/Header';
 
 const Main = () => {
     return (
-        <div className='md:px-8'>
+        <div className=''>
             <Header></Header>
-            <Outlet></Outlet>
+
+            <div>
+                <Outlet></Outlet>
+            </div>
+
             <Footer></Footer>
         </div>
     );

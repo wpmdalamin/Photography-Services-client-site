@@ -5,18 +5,23 @@ import useTitle from '../../Hook/useTitle';
 
 
 const ServicesDetails = () => {
-    const [reviews, setServices] = useState([])
+    const [reviews, setReviews] = useState([])
+    // const [loading, setLoading] = useState(true)
     const { user } = useContext(AuthContext)
+
     const { title, img, description, price } = useLoaderData();
     useTitle(title);
 
     const handelReviews = (event) => {
         event.preventDefault()
+
         const name = event.target.name.value;
         const email = event.target.email.value;
         const reating = event.target.reating.value;
         const reviewtext = event.target.reviewtext.value;
+
         const review = { name, email, reviewtext, reating, title }
+
         fetch('http://localhost:5000/review', {
             method: 'POST',
             headers: {
@@ -29,15 +34,13 @@ const ServicesDetails = () => {
                 console.log(data)
             })
 
-        event.target.reset()
-
+        event.target.reset();
     }
     useEffect(() => {
         fetch(`http://localhost:5000/service-reviews?title=${title}`)
             .then(res => res.json())
-            .then(data => setServices(data))
+            .then(data => setReviews(data))
     }, [title])
-
 
     return (
         <div>
