@@ -12,12 +12,12 @@ const AddService = () => {
         const description = event.target.description.value;
         const addService = { title, price, img, description, providerName }
         console.log(addService);
-        fetch('https://my-services-server.vercel.app/add-service', {
+        fetch('http://localhost:5000/add-service', {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(addService),
+            body: JSON.stringify(addService)
         })
         .then(res => res.json())
         .then(data => {

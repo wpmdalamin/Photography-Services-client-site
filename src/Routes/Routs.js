@@ -19,26 +19,26 @@ export const router = createBrowserRouter([
         errorElement: <Error></Error>,
         children: [
             {
-                path:'/',
+                path: '/',
                 element: <Home></Home>,
-                loader: () => fetch('https://my-services-server.vercel.app/services-home')
+                loader: () => fetch('http://localhost:5000/services-home')
             },
-            {   
+            {
                 path: "/services",
                 element: <Services></Services>
 
             },
-            {   
+            {
                 path: "/blog",
                 element: <Blog></Blog>
 
             },
-            {   
+            {
                 path: "/add-services",
                 element: <PrivateRoute><AddService></AddService></PrivateRoute>,
 
             },
-            {   
+            {
                 path: "/my-reviews",
                 element: <PrivateRoute><MyReviews></MyReviews></PrivateRoute>,
 
@@ -54,12 +54,12 @@ export const router = createBrowserRouter([
             {
                 path: '/service/:id',
                 element: <PrivateRoute><ServicesDetails></ServicesDetails></PrivateRoute>,
-                loader: ({params}) =>  fetch(`https://my-services-server.vercel.app/services/${params.id}`),
+                loader: ({ params }) => fetch(`http://localhost:5000/services/${params.id}`),
             },
             {
                 path: '/edit/:id',
                 element: <PrivateRoute><ReviewUpdate></ReviewUpdate></PrivateRoute>,
-                loader: ({params}) =>  fetch(`https://my-services-server.vercel.app/reviews/${params.id}`),
+                loader: ({ params }) => fetch(`http://localhost:5000/reviews/${params.id}`),
             }
         ]
     }

@@ -10,7 +10,11 @@ const MyReviews = () => {
     const [reviews, setReviews] = useState([])
 
     useEffect(() => {
-        fetch(`https://my-services-server.vercel.app/my-reviews?email=${user.email}`)
+        fetch(`http://localhost:5000/my-reviews?email=${user.email}`, {
+            headers: {
+                authorization: `Bearer ${localStorage.getItem('token')}`
+            }
+        })
             .then(res => res.json())
             .then(data => setReviews(data))
     }, [user?.email])
@@ -18,7 +22,7 @@ const MyReviews = () => {
     const handelReviewDelete = (review) => {
         const agree = window.confirm(`Are you sure want delete ${review.reviewtext}`)
         if (agree) {
-            fetch(`https://my-services-server.vercel.app/reviews/${review._id}`, {
+            fetch(`http://localhost:5000/reviews/${review._id}`, {
                 method: "DELETE"
             })
             .then(res => res.json())
