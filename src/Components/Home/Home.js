@@ -1,10 +1,11 @@
 import React from 'react';
 import { Link, useLoaderData } from 'react-router-dom';
-import Hero from '../Hero/Hero';
 import { PhotoProvider, PhotoView } from 'react-photo-view';
 import 'react-photo-view/dist/react-photo-view.css';
 import useTitle from '../../Hook/useTitle';
 import RecentWork from '../RecentWork/RecentWork';
+import Banner from '../Banner/Banner';
+import Aboutme from '../Aboutme/Aboutme';
 
 
 const Home = () => {
@@ -12,7 +13,9 @@ const Home = () => {
     useTitle('Home')
     return (
         <div>
-            <Hero></Hero>
+            <Banner></Banner>
+
+            <h3 className='text-5xl text-center py-4'>Services</h3>
 
             <div className="grid md:grid-cols-3 gap-8 sm:px-1 md:px-5" >
                 {
@@ -43,6 +46,7 @@ const Home = () => {
             </div>
 
             <RecentWork></RecentWork>
+            <Aboutme></Aboutme>
         </div>
     );
 };
